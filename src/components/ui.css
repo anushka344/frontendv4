@@ -1,0 +1,132 @@
+.login-container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    height: 100vh;
+  }
+  
+  .login-form {
+    padding: 2rem;
+  }
+  
+  .login-image {
+    background-image: url("D:\Front-end\my-app\public\LoginImg.png");
+    background-size: cover;
+    background-position: center;
+   
+  }
+  .loginHead
+  {
+    color: #000;
+font-size: 24px;
+font-family: Poppins;
+font-weight: 500;
+  }
+  
+  .login-main-div
+  {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .login-inner-div
+  {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 60%;
+    display: flex;
+padding: 10px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+align-self: stretch;
+  }
+  .login-email
+  {
+    display: flex;
+width: 410px;
+padding-top: 10px;
+padding-bottom: 10px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 5px;
+  }
+.login-pass{
+    display: flex;
+width: 410px;
+padding-top: 10px;
+padding-bottom: 10px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 5px;
+}
+.login-button
+{
+    display: flex;
+height: 60px;
+margin-top: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+align-self: stretch;
+
+border-radius: 15px;
+border: 1px solid #8F8F8F;
+background: #101540;
+
+height: 40px;
+width: 200px;
+
+}
+  .checker-acc
+  {
+    display: flex;
+width: 410px;
+padding: 10px;
+align-items: center;
+gap: 10px;
+  }
+  @media (max-width: 800px) {
+    .login-image {
+      display: none;
+    }
+  }
+  .landingImg
+  {
+    background-image: url("D:\Front-end\my-app\public\landingImg.png");
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    width: 500px;
+    margin: auto;
+  }
+  
+  .landing-main
+  {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  .landing-main-inner 
+  {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+.homePageHead
+{
+    text-align: left;
+    color: #130606;
+    font-weight: 600;
+    font-size: 3rem;
+    font-family: Rampart One,cursive;
+    margin-bottom: 1.5rem;
+}
+.unitNav :hover
+{
+    color:red;
+}
