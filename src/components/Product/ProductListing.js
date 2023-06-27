@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './product.css';
 
 const ProductListing = () => {
   const [productData, setProductData] = useState([]);
@@ -58,12 +59,12 @@ const ProductListing = () => {
 
   return (
     <div className="content-container">
-      <h2>Product Listing</h2>
-      <Link to="/product/add" className="btn btn-success mb-3">
+      <h2 className="Producthead">Product Listing</h2>
+      <Link to="/product/add" className="btn  add-product">
         Add Product
       </Link>
-      <table className="table table-bordered">
-        <thead className="bg-dark text-white">
+      <table className="table table-bordered table-hover">
+        <thead className="bg-dark text-white tableHead">
           <tr>
             <th>ID</th>
             <th>Name</th>

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './supplier.css';
 
-const SupplierListing = () => {
-  const [supplierData, setSupplierData] = useState([]);
+
+const CustomerListing = () => {
+  const [customerData, setCustomerData] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('token'); // Get the JWT token from local storage
 
-    fetch("https://localhost:7240/api/Supplier", {
+    fetch("https://localhost:7240/api/Customer", {
       headers: {
         Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
       },
@@ -24,7 +24,7 @@ const SupplierListing = () => {
         }
       })
       .then((data) => {
-        setSupplierData(data);
+        setCustomerData(data);
       })
       .catch((error) => {
         console.log(error);
@@ -35,7 +35,7 @@ const SupplierListing = () => {
     if (window.confirm('Do you want to remove?')) {
       const token = localStorage.getItem('token'); // Get the JWT token from local storage
 
-      fetch(`https://localhost:7240/api/Supplier/${id}`, {
+      fetch(`https://localhost:7240/api/Customer/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
@@ -44,11 +44,11 @@ const SupplierListing = () => {
         .then((res) => {
           if (res.ok) {
             alert('Removed successfully.');
-            setSupplierData(supplierData.filter(supplier => supplier.id !== id));
+            setCustomerData(customerData.filter(customer => customer.id !== id));
           } else if (res.status === 401) {
             throw new Error("Unauthorized"); // Handle unauthorized access error
           } else {
-            throw new Error('Error deleting supplier');
+            throw new Error('Error deleting customer');
           }
         })
         .catch((error) => {
@@ -59,9 +59,9 @@ const SupplierListing = () => {
 
   return (
     <div className="content-container">
-      <h2 className="Supplierhead">Supplier Listing</h2>
-      <Link to="/supplier/add" className="btn add-supplier">
-        Add Supplier
+      <h2 className="Customerhead">Customer Listing</h2>
+      <Link to="/customer/add" className="btn btn-primary add-customer">
+        Add Customer
       </Link>
       <table className="table table-bordered table-hover">
         <thead className="bg-dark text-white tableHead">
@@ -71,24 +71,22 @@ const SupplierListing = () => {
             <th>Address</th>
             <th>Phone Number</th>
             <th>State</th>
-            <th>Country ID</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {supplierData.map((supplier) => (
-            <tr key={supplier.id}>
-              <td>{supplier.id}</td>
-              <td>{supplier.name}</td>
-              <td>{supplier.address}</td>
-              <td>{supplier.phoneNumber}</td>
-              <td>{supplier.state}</td>
-              <td>{supplier.countryId}</td>
+          {customerData.map((customer) => (
+            <tr key={customer.id}>
+              <td>{customer.id}</td>
+              <td>{customer.name}</td>
+              <td>{customer.address}</td>
+              <td>{customer.phoneNumber}</td>
+              <td>{customer.state}</td>
               <td>
-                <Link to={`/supplier/edit/${supplier.id}`} className="btn btn-primary btn-sm mr-2" style={{ marginRight: '10px' }}>
+                <Link to={`/customer/edit/${customer.id}`} className="btn btn-primary btn-sm mr-2" style={{ marginRight: '10px' }}>
                   Edit
                 </Link>
-                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(supplier.id)}>
+                <button className="btn btn-danger btn-sm" onClick={() => handleDelete(customer.id)}>
                   Delete
                 </button>
               </td>
@@ -100,4 +98,4 @@ const SupplierListing = () => {
   );
 };
 
-export default SupplierListing;
+export default CustomerListing;

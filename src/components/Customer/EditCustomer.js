@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const EditCountry = () => {
-  const { countryId } = useParams();
+const EditCustomer = () => {
+  const { customerId } = useParams();
 
-  const [country, setCountry] = useState({
-    countryName: "",
-    countryCode: "",
+  const [customer, setCustomer] = useState({
+    name: "",
+    address: "",
+    phoneNumber: "",
+    state: "",
   });
 
   useEffect(() => {
     const token = localStorage.getItem("token"); // Get the JWT token from local storage
 
-    fetch(`https://localhost:7240/api/Country/${countryId}`, {
+    fetch(`https://localhost:7240/api/Customer/${customerId}`, {
       headers: {
         Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        setCountry(data);
+        setCustomer(data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [countryId]);
+  }, [customerId]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setCountry((prevCountry) => ({ ...prevCountry, [name]: value }));
+    setCustomer((prevCustomer) => ({ ...prevCustomer, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -36,17 +38,17 @@ const EditCountry = () => {
 
     const token = localStorage.getItem("token"); // Get the JWT token from local storage
 
-    fetch(`https://localhost:7240/api/Country/${countryId}`, {
+    fetch(`https://localhost:7240/api/Customer/${customerId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
       },
-      body: JSON.stringify(country),
+      body: JSON.stringify(customer),
     })
       .then((res) => res.json())
       .then((data) => {
-        window.alert("Data updated successfully!");
+        window.alert("Customer data updated successfully!");
       })
       .catch((error) => {
         console.log(error);
@@ -55,34 +57,56 @@ const EditCountry = () => {
 
   return (
     <div className="container">
-      <h2>Edit Country</h2>
+      <h2>Edit Customer</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="countryName">Country Name</label>
+          <label htmlFor="customerName">Name</label>
           <input
             type="text"
             className="form-control"
-            id="countryName"
-            name="countryName"
-            value={country.countryName}
+            id="customerName"
+            name="name"
+            value={customer.name}
             onChange={handleInputChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="countryCode">Country Code</label>
+          <label htmlFor="customerAddress">Address</label>
           <input
             type="text"
             className="form-control"
-            id="countryCode"
-            name="countryCode"
-            value={country.countryCode}
+            id="customerAddress"
+            name="address"
+            value={customer.address}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="customerPhoneNumber">Phone Number</label>
+          <input
+            type="text"
+            className="form-control"
+            id="customerPhoneNumber"
+            name="phoneNumber"
+            value={customer.phoneNumber}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="customerState">State</label>
+          <input
+            type="text"
+            className="form-control"
+            id="customerState"
+            name="state"
+            value={customer.state}
             onChange={handleInputChange}
           />
         </div>
         <button type="submit" className="btn btn-primary mr-2">
           Update
         </button>
-        <Link to="/country" className="btn btn-secondary">
+        <Link to="/customer" className="btn btn-secondary">
           Back
         </Link>
       </form>
@@ -90,4 +114,4 @@ const EditCountry = () => {
   );
 };
 
-export default EditCountry;
+export default EditCustomer;

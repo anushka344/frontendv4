@@ -20,6 +20,14 @@ import EditSupplier from "./components/Supplier/EditSupplier";
 import ProductListing from "./components/Product/ProductListing";
 import AddProduct from "./components/Product/AddProduct";
 import EditProduct from "./components/Product/EditProduct";
+//Customer
+import CustomerListing from "./components/Customer/CustomerListing";
+import AddCustomer from "./components/Customer/AddCustomer";
+import EditCustomer from "./components/Customer/EditCustomer";
+//Payment
+import PaymentListing from "./components/Payment/PaymentListing";
+import AddPayment from "./components/Payment/AddPayment";
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -75,6 +83,18 @@ const App = () => {
               <Route path="/product" element={<ProductListing />} />
               <Route path="/product/add" element={<AddProduct />} />
               <Route path="/product/edit/:productId" element={<EditProduct />} />
+
+              {/* Customer */}
+              <Route path="/customer" element={<CustomerListing />} />
+          <Route path="/customer/add" element={<AddCustomer />} />
+          <Route path="/customer/edit/:customerId" element={<EditCustomer />} />
+
+          {/* Payment */}
+          
+          <Route path="/payment" element={<PaymentListing />} />
+          <Route path="/payments/add" element={<AddPayment />} />
+         
+
           
          
         

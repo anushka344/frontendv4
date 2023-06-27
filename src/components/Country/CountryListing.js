@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './country.css';
 
 const CountryListing = () => {
   const [countryData, setCountryData] = useState([]);
@@ -58,13 +59,13 @@ const CountryListing = () => {
 
   return (
     <div className="content-container">
-      <h2>Country Listing</h2>
-      <Link to="/countries/add" className="btn btn-success mb-3">
+      <h2 className="Countryhead">Country Listing</h2>
+      <Link to="/countries/add" className="add-country">
         Add Country
       </Link>
-      <table className="table table-bordered">
-        <thead className="bg-dark text-white">
-          <tr>
+      <table className="table table-bordered table-hover">
+        <thead className="bg-dark text-white tableHead">
+          <tr className="txt-tr">
             <th>ID</th>
             <th>Name</th>
             <th>Code</th>

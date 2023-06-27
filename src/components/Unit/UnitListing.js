@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsPencilFill, BsTrashFill } from 'react-icons/bs';
 import './Unit.css'; 
 
 const UnitListing = () => {
@@ -51,10 +50,10 @@ const UnitListing = () => {
   return (
     <div className="content-container">
       <h2 className="Unithead">Unit Listing</h2>
-      <Link to="/units/add" className="btn btn-success mb-3 addBtn">
+      <Link to="/units/add" className=" add-unit">
         Add Unit
       </Link>
-      <table className="table table-bordered tbl">
+      <table className="table table-bordered tbl table-hover">
         <thead className="bg-dark text-white tableHead">
           <tr>
             <th>ID</th>
@@ -70,11 +69,11 @@ const UnitListing = () => {
               <td>{unit.name}</td>
               <td>{unit.description}</td>
               <td>
-                <Link to={`/units/edit/${unit.id}`} className="btn btn-primary btn-sm mr-2" style={{ marginRight: '10px' }}>
-                  <BsPencilFill />
+                <Link to={`/units/edit/${unit.id}`} className="btn btn-primary btn-sm mr-2 edit-btn" style={{ marginRight: '10px' }}>
+                  Edit
                 </Link>
                 <button className="btn btn-danger btn-sm" onClick={() => handleDelete(unit.id)}>
-                  <BsTrashFill />
+                  Delete
                 </button>
               </td>
             </tr>
