@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './customer.css'; // Assuming you have a CSS file named "customer.css"
 
 const EditCustomer = () => {
   const { customerId } = useParams();
@@ -56,60 +58,68 @@ const EditCustomer = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Edit Customer</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="customerName">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="customerName"
-            name="name"
-            value={customer.name}
-            onChange={handleInputChange}
-          />
+    <div className="container-fluid d-flex justify-content-center align-items-center">
+      <div className="card mt-5" style={{ width: "500px" }}>
+        <div className="card-body">
+          <h2 className="card-title editcustomerhead">Edit Customer</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="customerName">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="customerName"
+                name="name"
+                value={customer.name}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="customerAddress">Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="customerAddress"
+                name="address"
+                value={customer.address}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="customerPhoneNumber">Phone Number</label>
+              <input
+                type="text"
+                className="form-control"
+                id="customerPhoneNumber"
+                name="phoneNumber"
+                value={customer.phoneNumber}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="customerState">State</label>
+              <input
+                type="text"
+                className="form-control"
+                id="customerState"
+                name="state"
+                value={customer.state}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary mr-2" style={{ marginRight: "15px" }}>
+              Update
+            </button>
+            <Link to="/customer" className="btn btn-secondary">
+              Back
+            </Link>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="customerAddress">Address</label>
-          <input
-            type="text"
-            className="form-control"
-            id="customerAddress"
-            name="address"
-            value={customer.address}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="customerPhoneNumber">Phone Number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="customerPhoneNumber"
-            name="phoneNumber"
-            value={customer.phoneNumber}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="customerState">State</label>
-          <input
-            type="text"
-            className="form-control"
-            id="customerState"
-            name="state"
-            value={customer.state}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary mr-2">
-          Update
-        </button>
-        <Link to="/customer" className="btn btn-secondary">
-          Back
-        </Link>
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './customer.css';
 
 
 const CustomerListing = () => {
@@ -58,7 +59,7 @@ const CustomerListing = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={{ padding: '40px' }}>
       <h2 className="Customerhead">Customer Listing</h2>
       <Link to="/customer/add" className="btn btn-primary add-customer">
         Add Customer

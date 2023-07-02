@@ -48,7 +48,7 @@ const UnitListing = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="content-container"  style={{ padding: '40px' }}>
       <h2 className="Unithead">Unit Listing</h2>
       <Link to="/units/add" className=" add-unit">
         Add Unit

@@ -58,7 +58,7 @@ const ProductListing = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={{ padding: '40px' }}>
       <h2 className="Producthead">Product Listing</h2>
       <Link to="/product/add" className="btn  add-product">
         Add Product

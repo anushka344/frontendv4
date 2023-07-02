@@ -1,34 +1,33 @@
-.Unithead {
-    color:   #7e1ee5 ;
+.Customerhead {
+    color:   #1bf7ec ;
 text-align: center;
-text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+text-shadow: 0px 4px 4px 0px rgba(227, 17, 17, 0.25);
 font-size: 32px;
 font-family: Poppins;
 font-weight: 500;
 margin-top: 50px;
-background: linear-gradient(to right,  #1E88E5 , #7e1ee5 );
+background: linear-gradient(to right,  #60e5ec , #16e1e4 );
 background-clip: text;
 -webkit-background-clip: text;
 color: transparent;
 }
-.add-unit{
-border-radius: 5px;
-background: linear-gradient(180deg, #1E88E5 0%, #1E88E5 100%);
-
-color: #FFF;
-text-align: center;
-font-size: 24px;
-font-family: Poppins;
-}
-
-.tableHead
-{
+/* .add-country{
+    border-radius: 5px;
+    background: linear-gradient(180deg, #4ae4a6 0%, #1cf5f1 100%);
+    
+    color: #FFF;
+    text-align: center;
+    font-size: 24px;
+    font-family: Poppins;
+    }*/
+    .tableHead
+{ 
     
 /* color:  linear-gradient(180deg, #1E88E5 0%, #7e1ee5 100%); */
 gap: 10px;
 
 }
-.add-unit
+.add-customer
 {
 
     display: flex;
@@ -36,7 +35,7 @@ padding: 10px 15px;
 justify-content: center;
 align-items: center;
 gap: 10px;
-background: linear-gradient(180deg, #1E88E5 0%, #7e1ee5 100%);
+background: linear-gradient(180deg, #4cf4e9 0%, #1af1e3 100%);
 height: 40px;
 width: 160px;
 margin-top: 30px;
@@ -44,12 +43,12 @@ margin-bottom: 30px;
 
 color: #FFF;
 text-align: center;
-font-size: 22px;
+font-size: 20px;
 font-family: Poppins;
 text-decoration: none;
 }
 
-.add-unit:hover
+.add-customer:hover
 {
     /* opacity: 75%; */
 /* background: linear-gradient(180deg, #71a8d8 0%, #8eb9de 100%); */
@@ -57,14 +56,7 @@ background: rgb(233, 230, 230);
 color: black;
 border: 2px solid grey;
 }
-
-tr:hover {
-    background: grey;
-    
-  } 
-  
-
-  table {
+table {
     width: 800px;
     border-collapse: collapse;
     overflow: hidden;
@@ -106,11 +98,5 @@ tr:hover {
 }
   
   }
-  .bg-black {
-    background : transparent;
-    height: 100vh;
-  }
-  .addunithead
-  {
-    text-align: center;
-  }
+
+ 

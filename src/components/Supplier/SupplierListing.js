@@ -58,7 +58,7 @@ const SupplierListing = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={{ padding: '40px' }}>
       <h2 className="Supplierhead">Supplier Listing</h2>
       <Link to="/supplier/add" className="btn add-supplier">
         Add Supplier

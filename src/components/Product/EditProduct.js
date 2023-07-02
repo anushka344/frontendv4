@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './product.css'; // Assuming you have a CSS file named "product.css"
 
 const EditProduct = () => {
   const { productId } = useParams();
@@ -55,49 +57,56 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Edit Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="productName">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="productName"
-            name="name"
-            value={product.name}
-            onChange={handleInputChange}
-          />
+    <div className="container d-flex justify-content-center align-items-center">
+      <div className="card mt-5" style={{ width: "500px" }}>
+        <div className="card-body">
+          <h2 className="card-title editproducthead">Edit Product</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="productName">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="productName"
+                name="name"
+                value={product.name}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="productQuantity">Quantity</label>
+              <input
+                type="number"
+                className="form-control"
+                id="productQuantity"
+                name="ProductQuantity"
+                value={product.ProductQuantity}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="productBrand">Brand</label>
+              <input
+                type="text"
+                className="form-control"
+                id="productBrand"
+                name="brand"
+                value={product.brand}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary mr-2" style={{ marginRight: "15px" }}> 
+              Update
+            </button>
+            <Link to="/product" className="btn btn-secondary">
+              Back
+            </Link>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="productQuantity">Quantity</label>
-          <input
-            type="number"
-            className="form-control"
-            id="productQuantity"
-            name="ProductQuantity" // Updated name to "ProductQuantity"
-            value={product.ProductQuantity} // Updated value to "ProductQuantity"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="productBrand">Brand</label>
-          <input
-            type="text"
-            className="form-control"
-            id="productBrand"
-            name="brand"
-            value={product.brand}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary mr-2">
-          Update
-        </button>
-        <Link to="/product" className="btn btn-secondary">
-          Back
-        </Link>
-      </form>
+      </div>
     </div>
   );
 };

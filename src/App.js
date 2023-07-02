@@ -52,7 +52,7 @@ const App = () => {
   return (
     <Router>
       {isLoggedIn && <Navbar onLogout={handleLogout} />}
-      <div className="container mt-4">
+       <div className=""> 
        
         <Routes>
           {!isLoggedIn && (

@@ -58,7 +58,7 @@ const CountryListing = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={{ padding: '40px' }}>
       <h2 className="Countryhead">Country Listing</h2>
       <Link to="/countries/add" className="add-country">
         Add Country

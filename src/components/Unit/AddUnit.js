@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Unit.css'; // Import custom CSS file for styling
 
 const AddUnit = () => {
   const [unit, setUnit] = useState({ name: "", description: "" });
@@ -37,43 +38,49 @@ const AddUnit = () => {
       .catch((error) => {
         console.log(error);
         // Handle and display error to the user
-       // window.alert("Error occurred while adding unit.");
+        // window.alert("Error occurred while adding unit.");
       });
   };
 
   return (
-    <div className="container">
-      <h2>Add Unit</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="unitName">Unit Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="unitName"
-            name="name"
-            value={unit.name}
-            onChange={handleInputChange}
-          />
+    <div className="container-fluid  d-flex justify-content-center align-items-center">
+      <div className="card mt-5" style={{ width: "500px" }}>
+        <div className="card-body">
+          <h2 className="card-title addunithead">Add Unit</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="unitName">Unit Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="unitName"
+                name="name"
+                value={unit.name}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="unitDesc">Unit Description</label>
+              <input
+                type="text"
+                className="form-control"
+                id="unitDesc"
+                name="description"
+                value={unit.description}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary " style={{ marginRight: '15px' }}>
+              Submit
+            </button>
+            <Link to="/units" className="btn btn-secondary">
+              Back
+            </Link>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="unitDesc">Unit Description</label>
-          <input
-            type="text"
-            className="form-control"
-            id="unitDesc"
-            name="description"
-            value={unit.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary mr-2">
-          Submit
-        </button>
-        <Link to="/units" className="btn btn-secondary">
-          Back
-        </Link>
-      </form>
+      </div>
     </div>
   );
 };

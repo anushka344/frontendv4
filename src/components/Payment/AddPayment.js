@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './payment.css'; // Assuming you have a CSS file named "payment.css"
 
 const AddPayment = () => {
   const currentDate = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
@@ -76,61 +78,69 @@ const AddPayment = () => {
   };
 
   return (
-    <div className="content-container">
-      <h2>Add Payment</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          {/* <label htmlFor="paymentDate">Payment Date</label>
-          <input
-            type="date"
-            className="form-control"
-            id="paymentDate"
-            name="paymentDate"
-            value={payment.paymentDate}
-            onChange={handleInputChange}
-          /> */}
+    <div className="container-fluid d-flex justify-content-center align-items-center">
+      <div className="card mt-5" style={{ width: "500px" }}>
+        <div className="card-body">
+          <h2 className="card-title addpaymenthead">Add Payment</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              {/* <label htmlFor="paymentDate">Payment Date</label>
+              <input
+                type="date"
+                className="form-control"
+                id="paymentDate"
+                name="paymentDate"
+                value={payment.paymentDate}
+                onChange={handleInputChange}
+              /> */}
+            </div>
+            <div className="form-group">
+              <label htmlFor="qty">Quantity</label>
+              <input
+                type="number"
+                className="form-control"
+                id="qty"
+                name="qty"
+                value={payment.qty}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="customerId">Customer ID</label>
+              <input
+                type="number"
+                className="form-control"
+                id="customerId"
+                name="customerId"
+                value={payment.customerId}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="productId">Product ID</label>
+              <input
+                type="number"
+                className="form-control"
+                id="productId"
+                name="productId"
+                value={payment.productId}
+                onChange={handleInputChange}
+                style={{ marginBottom: '20px' }}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary" style={{ marginRight: '15px' }}>
+            
+              Submit
+            </button>
+            <Link to="/payment" className="btn btn-secondary ml-2">
+              Back
+            </Link>
+            {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="qty">Quantity</label>
-          <input
-            type="number"
-            className="form-control"
-            id="qty"
-            name="qty"
-            value={payment.qty}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="customerId">Customer ID</label>
-          <input
-            type="number"
-            className="form-control"
-            id="customerId"
-            name="customerId"
-            value={payment.customerId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="productId">Product ID</label>
-          <input
-            type="number"
-            className="form-control"
-            id="productId"
-            name="productId"
-            value={payment.productId}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-        <Link to="/payment" className="btn btn-secondary ml-2">
-          Back
-        </Link>
-        {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './ui.css'; 
 const Register = () => {
   const [user, setUser] = useState({ name: "", email: "",phone:"786876", password: "" });
   const navigate = useNavigate();
@@ -38,10 +38,12 @@ const Register = () => {
   
   
   return (
-    <div className="container">
-      <h2>Register</h2>
+    <div className="container login-container">
+      <div className="login-form login-main-div">
+      <div className="login-inner-div">
+      <h2 className="loginHead">Register</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group  login-email">
           <label htmlFor="userName">Name</label>
           <input
             type="text"
@@ -52,7 +54,7 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group login-email">
           <label htmlFor="userEmail">Email</label>
           <input
             type="email"
@@ -64,7 +66,7 @@ const Register = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="userPassword">Password</label>
+          <label htmlFor="userPassword login-pass">Password</label>
           <input
             type="password"
             className="form-control"
@@ -74,13 +76,16 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary mr-2">
+        <button type="submit" className="btn btn-primary login-button">
           Register
         </button>
-        <p className="mt-2">
+        <p className="mt-2 checker-acc">
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </form>
+      </div>
+    </div>
+    <div className="signupImage"></div>
     </div>
   );
 };
