@@ -55,6 +55,7 @@ const AddSupplier = () => {
         console.log(error);
         window.alert("CountryId does not exist");
       });
+      window.location.href="http://localhost:3000/suppliers";
   };
 
   return (

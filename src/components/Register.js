@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ui.css'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Register = () => {
   const [user, setUser] = useState({ name: "", email: "",phone:"786876", password: "" });
   const navigate = useNavigate();
@@ -14,25 +17,55 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch("https://localhost:7240/api/Users/Register", {
+
       method: "POST",
+
       headers: {
+
         "Content-Type": "application/json",
+
       },
+
       body: JSON.stringify(user),
+
     })
+
       .then((res) => {
+
         console.log(res);
+
         if (!res.ok) {
+
+          // Check for error status
+
           throw new Error("Registration failed");
+
         }
+
         return res.json();
+
       })
+
       .then((data) => {
-        window.alert("Registration successful!");
-        navigate("/login");
+
+        if (data.message === "New Employer registered") {
+
+          window.location.href="http://localhost:3000/login";
+
+        } else {
+
+          toast.error("registration failed");
+
+        }
+
       })
+
       .catch((error) => {
+
         console.log(error);
+
+        window.alert("Registration failed. Please try again.");
+
       });
   };
   
@@ -86,6 +119,7 @@ const Register = () => {
       </div>
     </div>
     <div className="signupImage"></div>
+    <ToastContainer/>
     </div>
   );
 };

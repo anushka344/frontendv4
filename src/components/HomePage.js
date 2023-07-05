@@ -147,23 +147,7 @@ function HomePage() {
 
         {/* Work Section */}
 
-        {/* Modal for full size images on click*/}
-        <div
-          id="modal01"
-          className="home-modal home-black"
-          onclick="this.style.display='none'"
-        >
-          <span
-            className="home-button home-xxlarge home-black home-padding-large home-display-topright"
-            title="Close Modal Image"
-          >
-            ×
-          </span>
-          <div className="home-modal-content home-animate-zoom home-center home-transparent home-padding-64">
-            <img id="img01" className="home-image" />
-            <p id="caption" className="home-opacity home-large" />
-          </div>
-        </div>
+      
         
         {/* Contact Section */}
         {/* Footer */}
@@ -189,7 +173,7 @@ function HomePage() {
           </div>
 
 
-          <a href="/homePage" className="home-button home-light-grey">
+          <a href="/" className="home-button home-light-grey">
             <i className="fa fa-arrow-up home-margin-right" />
             To the top
           </a>

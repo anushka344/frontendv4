@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
+import LandingPage from "./components/LandingPage";
+// import Navbar2 from "./components/Navbar2";
 //units
 import UnitListing from "./components/Unit/UnitListing";
 import AddUnit from "./components/Unit/AddUnit";
@@ -56,7 +58,10 @@ const App = () => {
        
         <Routes>
           {!isLoggedIn && (
-            <Route path="/" element={<Register onLogin={handleLogin} />} />
+            <Route path="/" element={<LandingPage onLogin={handleLogin} />} />
+          )}
+          {!isLoggedIn && (
+            <Route path="/register" element={<Register onLogin={handleLogin} />} />
           )}
           {!isLoggedIn && (
             <Route path="/login" element={<Login onLogin={handleLogin} />} />

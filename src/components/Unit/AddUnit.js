@@ -40,6 +40,7 @@ const AddUnit = () => {
         // Handle and display error to the user
         // window.alert("Error occurred while adding unit.");
       });
+      window.location.href= "http://localhost:3000/units";
   };
 
   return (

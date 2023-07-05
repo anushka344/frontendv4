@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './country.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CountryListing = () => {
   const [countryData, setCountryData] = useState([]);
@@ -31,30 +33,57 @@ const CountryListing = () => {
       });
   }, []);
 
+  const deleteCountry = (id, token) => {
+    fetch(`https://localhost:7240/api/Country/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          toast.success("Removed successfully.");
+          setCountryData(countryData.filter(country => country.id !== id));
+        } else if (res.status === 401) {
+          throw new Error("Unauthorized"); // Handle unauthorized access error
+        } else {
+          throw new Error('Error deleting country');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleDelete = (id) => {
-    if (window.confirm('Do you want to remove?')) {
+   
       const token = localStorage.getItem('token'); // Get the JWT token from local storage
 
-      fetch(`https://localhost:7240/api/Country/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the JWT token in the Authorization header
-        },
-      })
-        .then((res) => {
-          if (res.ok) {
-            alert('Removed successfully.');
-            setCountryData(countryData.filter(country => country.id !== id));
-          } else if (res.status === 401) {
-            throw new Error("Unauthorized"); // Handle unauthorized access error
-          } else {
-            throw new Error('Error deleting country');
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+      toast.warn(
+        <div>
+          <p>Are you sure you want to remove?</p>
+          <div className="confirmation-buttons">
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => {
+                deleteCountry(id, token);
+                toast.dismiss();
+              }}
+            >
+              Yes
+            </button>
+            <span className="spacer"></span>
+            <button
+              className="btn btn-secondary btn-sm"
+              onClick={() => toast.dismiss()}
+            >
+              No
+            </button>
+          </div>
+        </div>,
+        { autoClose: false }
+      );
+    
   };
 
   return (
@@ -90,6 +119,7 @@ const CountryListing = () => {
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 };

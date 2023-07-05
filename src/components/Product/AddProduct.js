@@ -52,7 +52,7 @@ const AddProduct = () => {
                 })
                   .then((res) => res.json())
                   .then((data) => {
-                    window.alert("Product added successfully!");
+                    window.location.href="http://localhost:3000/product";
                   })
                   .catch((error) => {
                     console.log(error);
@@ -144,7 +144,7 @@ const AddProduct = () => {
                 style={{ marginBottom: '20px' }}
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary"style={{ marginRight: '10px' }}>
               Submit
             </button>
             <Link to="/product" className="btn btn-secondary ml-2" style={{ marginRight: '15px' }}>

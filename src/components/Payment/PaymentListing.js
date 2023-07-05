@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './payment.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PaymentListing = () => {
   const [paymentData, setPaymentData] = useState([]);
@@ -10,36 +12,36 @@ const PaymentListing = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    
+
     fetch('https://localhost:7240/api/Payment', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else if (res.status === 401) {
-        throw new Error('Unauthorized');
-      } else {
-        throw new Error('Error occurred');
-      }
-    })
-    .then((data) => {
-      setPaymentData(data);
-      const customerIds = data.map((payment) => payment.customerId);
-      const productIds = data.map((payment) => payment.productId);
-      fetchCustomerNames(customerIds);
-      fetchProductNames(productIds);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else if (res.status === 401) {
+          throw new Error('Unauthorized');
+        } else {
+          throw new Error('Error occurred');
+        }
+      })
+      .then((data) => {
+        setPaymentData(data);
+        const customerIds = data.map((payment) => payment.customerId);
+        const productIds = data.map((payment) => payment.productId);
+        fetchCustomerNames(customerIds);
+        fetchProductNames(productIds);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const fetchCustomerNames = (customerIds) => {
     const token = localStorage.getItem('token');
-    
+
     Promise.all(
       customerIds.map((customerId) =>
         fetch(`https://localhost:7240/api/Customer/${customerId}`, {
@@ -47,27 +49,27 @@ const PaymentListing = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            throw new Error('Error fetching customer names');
-          }
-        })
-        .then((customerData) => {
-          const customerName = customerData.name;
-          setCustomerNames((prevNames) => [...prevNames, { id: customerId, name: customerName }]);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              throw new Error('Error fetching customer names');
+            }
+          })
+          .then((customerData) => {
+            const customerName = customerData.name;
+            setCustomerNames((prevNames) => [...prevNames, { id: customerId, name: customerName }]);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
       )
     );
   };
 
   const fetchProductNames = (productIds) => {
     const token = localStorage.getItem('token');
-    
+
     Promise.all(
       productIds.map((productId) =>
         fetch(`https://localhost:7240/api/Product/${productId}`, {
@@ -75,48 +77,73 @@ const PaymentListing = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            throw new Error('Error fetching product names');
-          }
-        })
-        .then((productData) => {
-          const productName = productData.name;
-          setProductNames((prevNames) => [...prevNames, { id: productId, name: productName }]);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              throw new Error('Error fetching product names');
+            }
+          })
+          .then((productData) => {
+            const productName = productData.name;
+            setProductNames((prevNames) => [...prevNames, { id: productId, name: productName }]);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
       )
     );
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Do you want to remove?')) {
-      const token = localStorage.getItem('token');
-      
-      fetch(`https://localhost:7240/api/Payment/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+  const deletePayment = (id, token) => {
+    fetch(`https://localhost:7240/api/Payment/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
         if (res.ok) {
-          alert('Removed successfully.');
-          setPaymentData((prevData) => prevData.filter(payment => payment.id !== id));
+          toast.success("Removed successfully.");
+          setPaymentData(paymentData.filter(payment => payment.id !== id));
         } else if (res.status === 401) {
           throw new Error("Unauthorized");
         } else {
           throw new Error('Error deleting payment');
         }
-      })
+           })
       .catch((error) => {
         console.log(error);
       });
-    }
+  };
+
+  const handleDelete = (id) => {
+    const token = localStorage.getItem('token');
+
+    toast.warn(
+      <div>
+        <p>Are you sure you want to remove?</p>
+        <div className="confirmation-buttons">
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={() => {
+              deletePayment(id, token);
+              toast.dismiss();
+            }}
+          >
+            Yes
+          </button>
+          <span className="spacer"></span>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={() => toast.dismiss()}
+          >
+            No
+          </button>
+        </div>
+      </div>,
+      { autoClose: false }
+    );
   };
 
   return (
@@ -161,6 +188,7 @@ const PaymentListing = () => {
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 };

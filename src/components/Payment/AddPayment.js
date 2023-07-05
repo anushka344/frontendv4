@@ -60,13 +60,14 @@ const AddPayment = () => {
         }
       );
       if (paymentResponse.ok) {
-        window.alert("Payment added successfully!");
+        
         setPayment({
           paymentDate: currentDate,
           qty: 0,
           customerId: 0,
           productId: 0,
         });
+        window.location.href="http://localhost:3000/payment";
       } else if (paymentResponse.status === 401) {
         throw new Error("Unauthorized");
       } else {
@@ -75,6 +76,7 @@ const AddPayment = () => {
     } catch (error) {
       window.alert(error.message);
     }
+   
   };
 
   return (

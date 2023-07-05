@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Unit.css'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UnitListing = () => {
   const [unitData, setUnitData] = useState([]);
@@ -23,28 +25,53 @@ const UnitListing = () => {
       });
   }, []);
 
+  const deleteUnit = (id, token) => {
+    fetch(`https://localhost:7240/api/Unit/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the authorization header
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          toast.success("Removed successfully.");
+          setUnitData(unitData.filter(unit => unit.id !== id));
+        } else {
+          throw new Error('Error deleting unit');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleDelete = (id) => {
     const token = localStorage.getItem('token'); // Retrieve the token from local storage
 
-    if (window.confirm('Do you want to remove?')) {
-      fetch(`https://localhost:7240/api/Unit/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the authorization header
-        },
-      })
-        .then((res) => {
-          if (res.ok) {
-            alert('Removed successfully.');
-            setUnitData(unitData.filter(unit => unit.id !== id));
-          } else {
-            throw new Error('Error deleting unit');
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    toast.warn(
+      <div>
+        <p>Are you sure you want to remove?</p>
+        <div className="confirmation-buttons">
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={() => {
+              deleteUnit(id, token);
+              toast.dismiss();
+            }}
+          >
+            Yes
+          </button>
+          <span className="spacer"></span>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={() => toast.dismiss()}
+          >
+            No
+          </button>
+        </div>
+      </div>,
+      { autoClose: false }
+    );
   };
 
   return (
@@ -80,6 +107,7 @@ const UnitListing = () => {
           ))}
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   );
 };

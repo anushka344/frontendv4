@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import './ui.css';
 
 const Navbar = () => {
   const handleLogout = () => {
@@ -23,7 +24,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse nav-main" id="navbarSupportedContent" style={{display:'flex'}}>
           <ul className="navbar-nav ml-auto">
         
             <li className="nav-item unitNav">
@@ -44,10 +45,13 @@ const Navbar = () => {
             <li className="nav-item unitNav">
               <a className="nav-link" href="/payment">Payment</a>
             </li>
-            <li className="nav-item">
-              <button className="btn btn-link nav-link" onClick={handleLogout}>LogOut</button>
-            </li>
+            {/* <li className="nav-item">
+              <img className="btn btn-link nav-link" onClick={handleLogout} src="turn-off.png"/>
+            </li> */}
           </ul>
+          <div style={{display:'flex', marginLeft:'auto'}}>
+          <img className="btn btn-link nav-link" onClick={handleLogout} src="turn-off.png"/>
+          </div>
         </div>
       </div>
     </nav>

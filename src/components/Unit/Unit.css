@@ -114,3 +114,12 @@ tr:hover {
   {
     text-align: center;
   }
+  .confirmation-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .spacer {
+    margin: 0 10px;
+  }
+  
